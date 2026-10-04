@@ -1,0 +1,66 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Default capabilities",
+  "platforms": ["linux", "macOS", "windows"],
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "os:default",
+    "core:window:allow-minimize",
+    "core:window:allow-maximize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-close",
+    "core:window:allow-unminimize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-show",
+    "dialog:allow-open",
+    "http:default",
+    {
+      "identifier": "http:allow-fetch",
+      "allow": [{ "url": "http://**" }, { "url": "https://**" }]
+    },
+    "fs:default",
+    "fs:allow-read-text-file",
+    "fs:allow-read-file",
+    "fs:allow-write-text-file",
+    "fs:allow-write-file",
+    "fs:allow-read-dir",
+    "fs:allow-mkdir",
+    "fs:allow-remove",
+    "fs:allow-exists",
+    {
+      "identifier": "fs:scope",
+      "allow": [{ "path": "/**" }, { "path": "$HOME/**" }]
+    },
+    "shell:default",
+    "shell:allow-stdin-write",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        { "name": "sh",  "cmd": "sh",      "args": ["-c",  { "validator": ".*" }] },
+        { "name": "bash","cmd": "bash",     "args": ["-c",  { "validator": ".*" }] },
+        { "name": "cmd", "cmd": "cmd.exe",  "args": ["/C",  { "validator": ".*" }] }
+      ]
+    },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        { "name": "sh",  "cmd": "sh",      "args": ["-c",  { "validator": ".*" }] },
+        { "name": "bash","cmd": "bash",     "args": ["-c",  { "validator": ".*" }] },
+        { "name": "cmd", "cmd": "cmd.exe",  "args": ["/C",  { "validator": ".*" }] }
+      ]
+    },
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "betopia",
+          "sidecar": true,
+          "args": true
+        }
+      ]
+    }
+  ]
+}
