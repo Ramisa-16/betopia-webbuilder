@@ -1,0 +1,314 @@
+   SETTINGS PANEL — VS Code-inspired fonts, colors, spacing
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* VS Code font stack */
+:root {
+  --vscode-font:  'Segoe UI', system-ui, -apple-system, sans-serif;
+  --vscode-mono:  'Cascadia Code', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+  /* VS Code dark token colors used in Settings labels/values */
+  --vscode-blue:   #9cdcfe;
+  --vscode-green:  #4ec9b0;
+  --vscode-yellow: #dcdcaa;
+  --vscode-orange: #ce9178;
+  --vscode-purple: #c586c0;
+  --vscode-comment:#6a9955;
+  --vscode-string: #ce9178;
+  --vscode-number: #b5cea8;
+  --vscode-keyword:#569cd6;
+}
+
+/* Settings panel outer wrapper — VS Code Activity Bar feel */
+.settings-panel {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--vscode-font);
+  color: var(--text-2);
+}
+
+/* Sidebar — VS Code Activity Bar style */
+.settings-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.settings-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--text-2);
+  border-left: 2px solid transparent;
+  transition: background 0.1s, color 0.1s;
+  user-select: none;
+  white-space: nowrap;
+  font-family: var(--vscode-font);
+}
+.settings-nav-item:hover    { background: var(--surface-2); color: var(--text); }
+.settings-nav-item.active   {
+  background: var(--surface-2);
+  border-left-color: var(--accent);
+  color: var(--text);
+}
+.settings-nav-item svg { opacity: 0.75; flex-shrink: 0; }
+.settings-nav-item.active svg { opacity: 1; color: var(--accent); }
+
+/* Main content area */
+.settings-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 28px 36px;
+  background: var(--bg);
+}
+
+/* Section headers — VS Code Explorer panel style */
+.settings-section {
+  margin-bottom: 32px;
+}
+
+.settings-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--vscode-font);
+}
+
+/* Project identity row */
+.settings-project-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.settings-project-icon {
+  width: 40px; height: 40px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; color: white; flex-shrink: 0;
+}
+.settings-project-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--vscode-font);
+}
+.settings-project-url {
+  font-size: 11px;
+  color: var(--green);
+  font-family: var(--vscode-mono);
+  margin-top: 2px;
+}
+.settings-open-btn {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-2);
+  font-size: 12px;
+  font-family: var(--vscode-font);
+  cursor: pointer;
+  transition: all 0.1s;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.settings-open-btn:hover { background: var(--surface-2); border-color: var(--border-2); color: var(--text); }
+
+/* Settings rows — VS Code Settings editor style */
+.settings-rows {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+.settings-row:last-child { border-bottom: none; }
+.settings-row:hover { background: var(--surface-2); }
+
+.settings-row-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.settings-row-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  font-family: var(--vscode-font);
+}
+
+.settings-row-desc {
+  font-size: 11.5px;
+  color: var(--text-3);
+  font-family: var(--vscode-font);
+  line-height: 1.4;
+}
+
+/* URL / domain display — monospace like VS Code terminal */
+.settings-domain-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--vscode-mono);
+  font-size: 12px;
+  color: var(--accent);
+  cursor: default;
+}
+.settings-domain-copy {
+  border: none; background: transparent; color: var(--text-3);
+  cursor: pointer; padding: 2px; border-radius: 3px; transition: color 0.1s;
+}
+.settings-domain-copy:hover { color: var(--text-2); }
+
+/* Status badge — VS Code status bar style */
+.settings-status-live {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px;
+  background: rgba(35, 134, 54, 0.15);
+  border: 1px solid rgba(35, 134, 54, 0.4);
+  border-radius: 99px;
+  font-size: 11.5px; font-weight: 600;
+  color: var(--green);
+  font-family: var(--vscode-mono);
+}
+.settings-status-live::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  display: inline-block;
+}
+.settings-status-unpublished {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px;
+  background: rgba(134, 134, 134, 0.12);
+  border: 1px solid rgba(134, 134, 134, 0.25);
+  border-radius: 99px;
+  font-size: 11.5px; font-weight: 600;
+  color: var(--text-3);
+  font-family: var(--vscode-mono);
+}
+.settings-status-unpublished::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text-3);
+  display: inline-block;
+}
+
+/* Action buttons — VS Code button style */
+.settings-row-btn {
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-2);
+  font-size: 12px;
+  font-family: var(--vscode-font);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.1s;
+}
+.settings-row-btn:hover { background: var(--surface-2); border-color: var(--border-2); color: var(--text); }
+.settings-row-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.settings-row-btn.primary:hover { filter: brightness(1.06); }
+.settings-row-btn.danger:hover  { border-color: var(--red); color: var(--red); }
+
+/* Toggle switch — VS Code checkbox style */
+.settings-toggle {
+  position: relative;
+  width: 36px; height: 18px;
+  border: none;
+  background: var(--surface-3);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.settings-toggle.on  { background: var(--accent); }
+.settings-toggle-thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: left 0.18s;
+}
+.settings-toggle.on .settings-toggle-thumb { left: 20px; }
+
+/* Select dropdown — VS Code input style */
+.settings-select {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 4px;
+  color: var(--text-2);
+  font-size: 12px;
+  font-family: var(--vscode-font);
+  padding: 4px 10px;
+  outline: none;
+  cursor: pointer;
+  min-width: 140px;
+}
+.settings-select:focus { border-color: var(--accent); }
+
+/* "Coming soon" placeholder */
+.settings-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  gap: 8px;
+  text-align: center;
+  color: var(--text-3);
+  font-family: var(--vscode-font);
+}
+.settings-coming-soon h3 {
+  font-size: 14px; font-weight: 600; color: var(--text); margin: 0;
+}
+.settings-coming-soon p {
+  font-size: 12.5px; color: var(--text-3); margin: 0;
+  font-family: var(--vscode-mono);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════

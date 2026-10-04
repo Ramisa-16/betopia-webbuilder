@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "@xterm/xterm/css/xterm.css";
+
+/* Split partials — imported in original source order (cascade preserved). */
+@import "./styles/base.css";
+@import "./styles/chat.css";
+@import "./styles/panels-legacy.css";
+@import "./styles/terminal.css";
+@import "./styles/home.css";
+@import "./styles/settings-modal.css";
+@import "./styles/dialogs.css";
+@import "./styles/manus-shell.css";
+@import "./styles/preview-legacy.css";
+@import "./styles/explorer.css";
+@import "./styles/editor.css";
+@import "./styles/preview-logs.css";
+@import "./styles/publish.css";
+@import "./styles/header.css";
+@import "./styles/dialogs-extra.css";
+@import "./styles/dropdowns.css";
+@import "./styles/settings-panel.css";
+@import "./styles/settings-vscode.css";
+@import "./styles/chat-composer.css";
+@import "./styles/settings-sections.css";
+@import "./styles/titlebar.css";
+@import "./styles/agents.css";
+@import "./styles/approvals-diff.css";
+@import "./styles/search-tools.css";
+@import "./styles/refinements.css";
