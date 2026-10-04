@@ -1,0 +1,208 @@
+/* ── Agent Switcher ────────────────────────────────────────────────────────── */
+
+.agent-switcher-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 24px; padding: 0 8px;
+  font-size: 11px; font-family: var(--font); color: var(--text-2);
+  background: var(--surface-2); border: 1px solid var(--border-2);
+  border-radius: 6px; cursor: pointer; transition: all 0.15s;
+  white-space: nowrap;
+}
+.agent-switcher-btn:hover { background: var(--surface-3); color: var(--text); border-color: var(--border-2); }
+.agent-switcher-btn svg { opacity: 0.6; }
+
+.agent-dropdown {
+  z-index: 9999;
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  overflow: hidden; padding: 4px;
+}
+.agent-dropdown-section {
+  padding: 4px 10px 2px; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+}
+.agent-dropdown-divider { height: 1px; background: var(--border); margin: 3px 0; }
+.agent-dropdown-item {
+  display: flex; align-items: flex-start; gap: 8px; width: 100%;
+  padding: 6px 8px; border-radius: 6px; border: none; cursor: pointer;
+  background: transparent; color: var(--text); font-family: var(--font); text-align: left;
+  transition: background 0.1s;
+}
+.agent-dropdown-item:hover { background: var(--surface-2); }
+.agent-dropdown-item.active { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.agent-dropdown-item-text { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.agent-dropdown-item-name { font-size: 12px; color: var(--text); font-weight: 500; }
+.agent-dropdown-item-desc { font-size: 10.5px; color: var(--text-3); line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; }
+.agent-dropdown-manage { color: var(--text-3); font-size: 11px; }
+.agent-dropdown-manage span { font-size: 11px; color: var(--text-3); }
+
+/* Inline (openDown) mode — used inside compact overflow menu */
+.agent-switcher-inline { display: flex; flex-direction: column; }
+.agent-switcher-inline-opt {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 6px 8px; border-radius: 6px; border: none; cursor: pointer;
+  background: transparent; color: var(--text); font-family: var(--font);
+  font-size: 12px; text-align: left; transition: background 0.1s;
+}
+.agent-switcher-inline-opt:hover { background: var(--surface-3); }
+.agent-switcher-inline-opt.active { color: var(--accent); }
+
+/* ── Snippet Picker ────────────────────────────────────────────────────────── */
+
+.snippet-picker {
+  position: absolute; bottom: calc(100% + 6px); left: 0;
+  min-width: 260px; max-height: 220px; overflow-y: auto; z-index: 200;
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  padding: 4px;
+}
+.snippet-picker-header {
+  padding: 4px 10px 2px; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+}
+.snippet-picker-item {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 6px 8px; border-radius: 6px; border: none; cursor: pointer;
+  background: transparent; font-family: var(--font); text-align: left;
+  transition: background 0.1s;
+}
+.snippet-picker-item:hover { background: var(--surface-2); }
+.snippet-picker-handle {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  background: var(--accent-bg); padding: 1px 6px; border-radius: 4px; flex-shrink: 0;
+}
+.snippet-picker-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
+.snippet-picker-name { font-size: 12px; color: var(--text); font-weight: 500; }
+.snippet-picker-desc { font-size: 10.5px; color: var(--text-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Agents Settings Tab ───────────────────────────────────────────────────── */
+
+.agents-section { display: flex; flex-direction: column; gap: 20px; }
+.agents-label { font-size: 11px; font-weight: 500; color: var(--text-2); letter-spacing: 0.01em; }
+.agents-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.agents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 500px) { .agents-grid { grid-template-columns: 1fr; } }
+
+.agent-card {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface-2);
+  transition: border-color 0.15s;
+}
+.agent-card.active { border-color: color-mix(in srgb, var(--accent) 50%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent); }
+.agent-card-head { display: flex; align-items: flex-start; gap: 8px; }
+.agent-card-icon {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; background: var(--surface-3); flex-shrink: 0; color: var(--text-2);
+}
+.agent-card-meta { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.agent-card-name { font-size: 12.5px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.agent-card-badge {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-3); background: var(--surface-3); padding: 1px 5px; border-radius: 3px;
+}
+.agent-card-desc { font-size: 10.5px; color: var(--text-3); line-height: 1.4; }
+.agent-card-actions { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.agent-card-use {
+  font-size: 10.5px; padding: 3px 10px; border-radius: 5px; border: 1px solid var(--border-2);
+  background: var(--surface-3); color: var(--text-2); cursor: pointer; font-family: var(--font);
+  display: flex; align-items: center; gap: 4px; transition: all 0.15s;
+}
+.agent-card-use:hover { background: var(--surface); color: var(--text); }
+.agent-card-use.active-btn { background: var(--accent); border-color: var(--accent); color: #fff; }
+.agent-card-btns { display: flex; gap: 2px; }
+.agent-icon-btn {
+  width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; border: none; background: transparent; color: var(--text-3);
+  cursor: pointer; transition: all 0.15s;
+}
+.agent-icon-btn:hover { background: var(--surface-3); color: var(--text); }
+.agent-icon-btn.danger:hover { color: var(--red); }
+
+.snippets-list { display: flex; flex-direction: column; gap: 6px; }
+.snippet-row {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-radius: 7px; border: 1px solid var(--border); background: var(--surface-2);
+}
+.snippet-row-handle {
+  font-family: var(--mono); font-size: 11px; color: var(--text-2);
+  background: var(--surface-3); padding: 2px 6px; border-radius: 4px; flex-shrink: 0;
+}
+.snippet-row-info { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.snippet-row-name { font-size: 12px; font-weight: 500; color: var(--text); }
+.snippet-row-desc { font-size: 10.5px; color: var(--text-3); }
+.snippets-empty {
+  border: 1px dashed var(--border); border-radius: 8px;
+  padding: 20px; text-align: center; font-size: 12px; color: var(--text-3);
+}
+.snippets-empty code { font-family: var(--mono); background: var(--surface-2); padding: 1px 6px; border-radius: 3px; }
+
+/* ── Agent/Snippet Editor Dialog ───────────────────────────────────────────── */
+
+.agent-editor-overlay {
+  position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.agent-editor-dialog {
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 12px; padding: 20px; width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.agent-editor-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 16px; }
+.agent-editor-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.agent-editor-label { font-size: 11px; font-weight: 500; color: var(--text-2); }
+.agent-editor-input {
+  height: 34px; padding: 0 10px; font-size: 12.5px; font-family: var(--font);
+  background: var(--surface-2); border: 1px solid var(--border-2); border-radius: 6px;
+  color: var(--text); outline: none; transition: border-color 0.15s;
+}
+.agent-editor-input:focus { border-color: var(--accent); }
+.agent-editor-textarea {
+  padding: 8px 10px; font-size: 12px; font-family: var(--font); line-height: 1.6;
+  background: var(--surface-2); border: 1px solid var(--border-2); border-radius: 6px;
+  color: var(--text); outline: none; resize: vertical; min-height: 120px;
+  transition: border-color 0.15s;
+}
+.agent-editor-textarea.mono { font-family: var(--mono); font-size: 11.5px; }
+.agent-editor-textarea:focus { border-color: var(--accent); }
+.agent-editor-hint { font-size: 10.5px; color: var(--red); }
+.agent-editor-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.agent-editor-cancel {
+  padding: 6px 14px; font-size: 12.5px; font-family: var(--font);
+  background: transparent; border: 1px solid var(--border-2); border-radius: 6px;
+  color: var(--text-2); cursor: pointer; transition: all 0.15s;
+}
+.agent-editor-cancel:hover { background: var(--surface-2); }
+.agent-editor-save {
+  padding: 6px 14px; font-size: 12.5px; font-family: var(--font);
+  background: var(--accent); border: none; border-radius: 6px;
+  color: #fff; cursor: pointer; transition: opacity 0.15s;
+}
+.agent-editor-save:disabled { opacity: 0.4; cursor: not-allowed; }
+.agent-editor-save:not(:disabled):hover { opacity: 0.9; }
+
+.icon-picker { display: flex; gap: 4px; flex-wrap: wrap; }
+.icon-picker-btn {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--text-2); cursor: pointer; transition: all 0.15s;
+}
+.icon-picker-btn:hover { background: var(--surface-3); color: var(--text); }
+.icon-picker-btn.selected { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+
+.handle-input-wrap { position: relative; }
+.handle-prefix {
+  position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  font-family: var(--mono); font-size: 12px; color: var(--text-3); pointer-events: none;
+}
+.handle-input { padding-left: 20px !important; font-family: var(--mono) !important; }
+
+.custom-instructions-block { display: flex; flex-direction: column; gap: 6px; }
+.custom-instructions-header { display: flex; align-items: center; justify-content: space-between; }
+.custom-instructions-save {
+  padding: 3px 10px; font-size: 11px; font-family: var(--font);
+  background: var(--accent); border: none; border-radius: 5px;
+  color: #fff; cursor: pointer; transition: opacity 0.15s;
+}
+.custom-instructions-save:hover { opacity: 0.9; }
