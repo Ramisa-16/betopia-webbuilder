@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Auto-append the just-made commit to UPDATE-TRACKER.md, then fold it into
+# the same commit via --amend. Recursion-guarded with a lock file.
+set -euo pipefail
+
+GITDIR="$(git rev-parse --git-dir)"
+LOCK="$GITDIR/.tracker-updating"
+[ -f "$LOCK" ] && exit 0          # we are inside our own amend → bail
+
+ROOT="$(git rev-parse --show-toplevel)"
+TRACKER="$ROOT/UPDATE-TRACKER.md"
+[ -f "$TRACKER" ] || exit 0
+
+# Skip merge commits
+[ -f "$GITDIR/MERGE_HEAD" ] && exit 0
+
+subject="$(git log -1 --pretty=%s)"
+hash="$(git log -1 --pretty=%h)"
+date="$(git log -1 --date=short --pretty=%cd)"
+
+# Don't double-log a commit that only touched the tracker
+changed="$(git show --name-only --pretty=format: HEAD | grep -v '^$' || true)"
+if [ "$changed" = "UPDATE-TRACKER.md" ]; then exit 0; fi
+
+# Conventional-commit type → column; default chore
+type="$(printf '%s' "$subject" | grep -oiE '^(feat|fix|perf|docs|refactor|chore|test|style|build|ci)' || echo chore)"
+type="$(printf '%s' "$type" | tr '[:upper:]' '[:lower:]')"
+# Strip the "type(scope): " prefix for the summary; escape pipes
+summary="$(printf '%s' "$subject" | sed -E 's/^[a-zA-Z]+(\([^)]*\))?!?: *//' | sed 's/|/\\|/g')"
+
+row="| $date | $type | $summary | $hash |"
+
+# Insert directly under the top table's separator line (first match only)
+tmp="$(mktemp)"
+awk -v row="$row" '
+  !done && /^\|------\|------\|---------\|-----\|/ { print; print row; done=1; next }
+  { print }
+' "$TRACKER" > "$tmp" && mv "$tmp" "$TRACKER"
+
+# Fold into the current commit without re-firing this hook
+touch "$LOCK"
+git add "$TRACKER"
+git commit --amend --no-edit --no-verify >/dev/null 2>&1 || true
+rm -f "$LOCK"
