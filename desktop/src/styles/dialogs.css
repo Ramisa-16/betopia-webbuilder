@@ -1,0 +1,214 @@
+/* ── Permission dialog ───────────────────────────────────────────────────── */
+.perm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10050;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.12s ease;
+  padding: 16px;
+}
+.perm-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
+  width: 500px;
+  max-width: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  animation: slideUp 0.15s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.perm-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.perm-icon-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(18px * var(--font-scale, 1));
+}
+.perm-title-area { display: flex; flex-direction: column; gap: 3px; padding-top: 2px; }
+.perm-title { font-size: calc(15px * var(--font-scale, 1)); font-weight: 700; color: var(--text); }
+.perm-sub { font-size: calc(13px * var(--font-scale, 1)); color: var(--text-2); }
+.perm-sub strong { color: var(--text); font-weight: 600; }
+.perm-preview {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.perm-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.perm-row:last-child { border-bottom: none; }
+.perm-row-label {
+  font-size: calc(10px * var(--font-scale, 1));
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.perm-row-value {
+  font-size: calc(12px * var(--font-scale, 1));
+  font-family: var(--mono);
+  color: var(--text);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 100px;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+.perm-hint {
+  font-size: calc(11px * var(--font-scale, 1));
+  color: var(--text-3);
+  text-align: center;
+}
+.perm-hint kbd {
+  background: var(--surface-3);
+  border: 1px solid var(--border-2);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: var(--mono);
+  font-size: calc(11px * var(--font-scale, 1));
+  color: var(--text-2);
+}
+.perm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.perm-btn-deny {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  font-size: calc(13px * var(--font-scale, 1));
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.perm-btn-deny:hover { border-color: var(--red); color: var(--red); }
+.perm-btn-yolo {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-3);
+  font-size: calc(13px * var(--font-scale, 1));
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.perm-btn-yolo:hover { border-color: var(--yellow); color: var(--yellow); }
+.perm-btn-allow {
+  padding: 8px 22px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-size: calc(13px * var(--font-scale, 1));
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.perm-btn-allow:hover { opacity: 0.88; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+  WORKSPACE LAYOUT — Manus-style split builder
+  ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --explorer-w:    220px;
+  --logs-h-closed: 32px;
+  --logs-h-open:   200px;
+}
+
+/* app-body: [chat] + [builder-workspace] */
+.app-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* builder-workspace fills all space right of the chat panel */
+.builder-workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  gap: 1px;
+  background: var(--border);
+}
+
+.builder-code-pane,
+.builder-preview-pane {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.builder-code-pane {
+  flex: 1.1;
+  background: var(--bg);
+}
+
+.builder-preview-pane {
+  flex: 0.9;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+}
+
+.builder-focus-live .builder-code-pane { flex: 0.9; }
+.builder-focus-live .builder-preview-pane { flex: 1.1; }
+.builder-focus-code .builder-code-pane { flex: 1.1; }
+.builder-focus-code .builder-preview-pane { flex: 0.9; }
+.builder-workspace-single {
+  background: var(--bg);
+  gap: 0;
+}
+.builder-code-pane-full,
+.builder-preview-pane-full {
+  flex: 1;
+}
+.builder-preview-pane-full {
+  border-left: none;
+}
+
+.builder-preview-pane .live-preview,
+.builder-preview-pane .manus-preview {
+  flex: 1;
+  min-height: 0;
+}
