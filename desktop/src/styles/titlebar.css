@@ -1,0 +1,167 @@
+/* ── Custom titlebar drag region ─────────────────────────────────────────── */
+
+/* macOS: add padding-top so content clears the native traffic light buttons */
+@media (prefers-color-scheme: light), (prefers-color-scheme: dark) {
+  /* Applied via JS platform check; keep this as fallback */
+}
+
+.manus-header-drag {
+  flex: 1;
+  min-width: 8px;
+  height: 100%;
+  /* This div is the actual drag target — it fills empty space in the header */
+}
+
+/* ── Window controls (custom titlebar) ───────────────────────────────────── */
+
+.win-controls {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 4px 0 8px; flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  margin-left: 4px;
+}
+.win-btn {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border: none; border-radius: 6px; background: transparent;
+  color: var(--text-3); cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.win-btn:hover { background: var(--surface-3); color: var(--text); }
+.win-close:hover { background: rgba(239,68,68,0.15); color: #ef4444; }
+.win-min:hover  { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.win-max:hover  { background: rgba(34,197,94,0.15);  color: #22c55e; }
+
+/* ── Toolbar pill ────────────────────────────────────────────────────────── */
+
+.toolbar-pill {
+  position: relative;
+  display: inline-flex; align-items: center;
+  height: 26px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  overflow: visible;
+}
+.toolbar-pill-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 100%; border: none; background: transparent;
+  color: var(--text-3); cursor: pointer; transition: color 0.15s, background 0.15s;
+  border-radius: 0;
+}
+.toolbar-pill-btn:first-child { border-radius: 7px 0 0 7px; }
+.toolbar-pill-btn:last-of-type { border-radius: 0 7px 7px 0; }
+.toolbar-pill-btn:hover { background: var(--surface-3); color: var(--text); }
+.toolbar-pill-btn.active { color: var(--accent); }
+.toolbar-pill-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.toolbar-pill-sep {
+  width: 1px; height: 14px; background: var(--border);
+  flex-shrink: 0;
+}
+.toolbar-pill-dropdown {
+  z-index: 9999;
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 9px; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  padding: 4px;
+}
+.toolbar-pill-opt {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 7px 10px; border-radius: 6px; border: none; background: transparent;
+  color: var(--text); font-size: 12px; font-family: var(--font);
+  cursor: pointer; transition: background 0.1s; text-align: left;
+}
+.toolbar-pill-opt:hover { background: var(--surface-2); }
+.toolbar-pill-opt.active { background: var(--accent-bg); }
+
+/* Inline toolbar pill — used inside overflow menu */
+.toolbar-pill-inline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.toolbar-pill-inline-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toolbar-pill-inline .toolbar-pill-opt {
+  width: 100%;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 8px 10px;
+}
+
+/* ── Context Window Panel ─────────────────────────────────────────────────── */
+
+.ctx-window-wrap {
+  position: relative;
+  display: flex; align-items: center;
+}
+.ctx-window-trigger {
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 6px 0 4px;
+  width: auto !important;
+}
+.ctx-window-pct {
+  font-size: 10px; font-weight: 600; line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.4s;
+}
+.ctx-window-panel {
+  position: absolute; bottom: calc(100% + 8px); right: 0;
+  width: 224px; z-index: 300;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.ctx-window-header {
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.ctx-window-header-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.ctx-window-pct-label {
+  font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.ctx-window-token-label {
+  font-size: 10.5px; color: var(--text-3); font-variant-numeric: tabular-nums;
+}
+.ctx-progress-track {
+  width: 100%; height: 5px; background: var(--border-2); border-radius: 3px; overflow: hidden;
+}
+.ctx-progress-fill {
+  height: 100%; border-radius: 3px;
+}
+.ctx-window-body {
+  padding: 8px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.ctx-window-row {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ctx-row-label {
+  font-size: 11px; color: var(--text-3);
+}
+.ctx-row-val {
+  font-size: 11px; font-variant-numeric: tabular-nums; color: var(--text);
+}
+.ctx-window-footer {
+  padding: 7px 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.ctx-window-note {
+  font-size: 10px; color: var(--text-3); font-style: italic; line-height: 1.3; flex: 1;
+}
+.ctx-compact-btn {
+  flex-shrink: 0; padding: 3px 8px; font-size: 11px;
+  border: 1px solid var(--border-2); border-radius: 5px;
+  background: var(--surface-2); color: var(--text);
+  cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.ctx-compact-btn:hover:not(:disabled) { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+.ctx-compact-btn:disabled { opacity: 0.4; cursor: not-allowed; }

@@ -1,0 +1,51 @@
+version: 2
+
+project_name: betopia
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: betopia
+    main: .
+    binary: betopia
+    env:
+      - CGO_ENABLED=0
+      - GOEXPERIMENT=greenteagc
+    ldflags:
+      - -s -w -X github.com/betopia/betopia-coder/internal/version.Version={{.Version}} -X github.com/betopia/betopia-coder/internal/version.Commit={{.Commit}}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    files:
+      - LICENSE.md
+      - README.md
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+  use: github-native
+
+release:
+  draft: false
+  prerelease: auto

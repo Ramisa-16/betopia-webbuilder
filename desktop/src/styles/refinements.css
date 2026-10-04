@@ -1,0 +1,169 @@
+   IDE-GRADE ALIGNMENT REFINEMENT  (navbar + menus + settings)
+   Goal: VS Code / Cursor-style structure — grouped menubar, a single aligned
+   label column in dropdowns, consistent control rhythm. All colors via theme
+   tokens so every theme (betopia/claude/light/solarized/midnight/…) stays correct.
+   Scoped to existing classes; appended last so it wins the cascade. Reversible.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Menubar: group logo · menus · project name like an IDE title bar ──────── */
+.manus-header-left { gap: 6px; }
+
+.manus-logo-group {
+  padding-right: 8px;
+  margin-right: 2px;
+  border-right: 1px solid var(--border);
+}
+
+/* File / Edit / Windows read as one tight button group, vertically centered */
+.manus-menu-btn {
+  height: 28px;
+  padding: 0 9px;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+}
+
+/* Divider + breathing room before the active project name */
+.manus-project-name {
+  padding-left: 10px;
+  margin-left: 4px;
+  border-left: 1px solid var(--border);
+  line-height: 28px;
+}
+
+/* ── Dropdown menus: one aligned label column (the key fix) ─────────────────
+   Every item reserves a fixed left gutter, so labels line up whether or not
+   the row has a leading icon — exactly like a native IDE File menu. Leading
+   icons and checkmarks are placed INTO that gutter instead of pushing text. */
+.manus-dropdown--menu { padding: 5px; }
+
+.manus-dropdown--menu .manus-dropdown-item {
+  position: relative;
+  min-height: 30px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 12px;
+  padding-left: 12px;
+  border-radius: 6px;
+}
+
+/* Leading icon → sits in the gutter, never offsets the label */
+.manus-dropdown--menu .manus-dropdown-item-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+}
+
+/* Checkmark column (Windows menu) shares the same gutter */
+.manus-dropdown--menu .manus-dropdown-item--check { gap: 0; }
+.manus-dropdown--menu .manus-check-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  justify-content: center;
+}
+
+/* Trailing affordances stay flush-right and aligned across rows */
+.manus-dropdown--menu .manus-shortcut { padding-left: 16px; }
+.manus-dropdown--menu .manus-flyout-arrow { margin-left: auto; }
+.manus-dropdown--menu .manus-dropdown-item-tail-icon { margin-left: 6px; color: var(--text-3); }
+
+/* Tighter, more even separators between menu groups */
+.manus-dropdown--menu .manus-dropdown-sep { margin: 5px 8px; }
+
+/* ── App settings: tabs read as a real segmented header ────────────────────── */
+.settings-tabs { gap: 2px; }
+.settings-tab {
+  padding: 10px 14px;
+  border-radius: 7px 7px 0 0;
+  font-weight: 500;
+}
+.settings-tab:hover { background: var(--surface-2); color: var(--text-2); }
+
+/* ── Project settings: align the left nav rail to a consistent rhythm ──────── */
+.settings-nav-item { height: 34px; border-radius: 7px; }
+.settings-sidebar-label { letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* ── Chat sidebar toggle in the header ─────────────────────────────────────── */
+.manus-sidebar-toggle { width: 30px; height: 30px; }
+.manus-sidebar-toggle.active { color: var(--accent); border-color: var(--accent-bg); }
+
+/* ── Edit & resend button on user chat messages (hover-reveal) ─────────────── */
+.message-user { position: relative; }
+.message-user .msg-edit-btn {
+  position: absolute; top: 4px; right: 4px;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--text-3); border-radius: 6px; cursor: pointer;
+  opacity: 0; transition: opacity 0.12s, color 0.12s;
+}
+.message-user:hover .msg-edit-btn { opacity: 1; }
+.msg-edit-btn:hover { color: var(--text); border-color: var(--border-2); }
+
+/* ── Quick Open (Ctrl+P) command palette ───────────────────────────────────── */
+.quickopen-overlay {
+  position: fixed; inset: 0; z-index: 4000;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding-top: 80px; background: rgba(0,0,0,0.4);
+}
+.quickopen {
+  width: min(560px, calc(100vw - 48px));
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.45); overflow: hidden;
+}
+.quickopen-input {
+  width: 100%; padding: 12px 14px; border: none;
+  border-bottom: 1px solid var(--border); background: transparent;
+  color: var(--text); font-size: 14px; font-family: var(--font); outline: none;
+}
+.quickopen-list { max-height: 360px; overflow-y: auto; padding: 4px; }
+.quickopen-empty { padding: 16px; text-align: center; color: var(--text-3); font-size: 13px; }
+.quickopen-item {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 7px 10px; border: none; background: transparent;
+  border-radius: 6px; cursor: pointer; text-align: left; color: var(--text); font-size: 13px;
+}
+.quickopen-item.active { background: var(--surface-2); }
+.quickopen-name { font-weight: 500; flex-shrink: 0; }
+.quickopen-path {
+  color: var(--text-3); font-size: 11px; font-family: var(--mono);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: auto;
+}
+
+/* ── @file mention picker in chat input ────────────────────────────────────── */
+.chat-at-picker {
+  position: absolute; bottom: calc(100% + 6px); left: 0; right: 0;
+  max-height: 240px; overflow-y: auto;
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  padding: 4px; z-index: 1500;
+}
+.chat-at-item {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 6px 9px; border: none; background: transparent;
+  border-radius: 6px; cursor: pointer; text-align: left;
+  color: var(--text); font-size: 12.5px;
+}
+.chat-at-item.active, .chat-at-item:hover { background: var(--surface-2); }
+.chat-at-name { font-weight: 500; flex-shrink: 0; }
+.chat-at-path {
+  color: var(--text-3); font-size: 10.5px; font-family: var(--mono);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: auto;
+}
+
+/* ── Bottom status bar (VS Code style) ─────────────────────────────────────── */
+.status-bar {
+  display: flex; align-items: center; gap: 14px;
+  height: 24px; flex-shrink: 0; padding: 0 12px;
+  background: var(--surface); border-top: 1px solid var(--border);
+  font-size: 11.5px; color: var(--text-2); font-family: var(--font); user-select: none;
+}
+.status-item { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.status-errors { color: var(--red); }
+.status-spacer { flex: 1; }

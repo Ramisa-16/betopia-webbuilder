@@ -1,0 +1,722 @@
+   CHAT + MENU — exact screenshot match
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Override: clean neutral + button, no green */
+.chat-upload-btn {
+  width: 26px !important;
+  height: 26px !important;
+  border: 1px solid var(--border-2) !important;
+  background: transparent !important;
+  color: var(--text-2) !important;
+  border-radius: 7px !important;
+}
+.chat-upload-btn:hover:not(:disabled) {
+  background: var(--surface-3) !important;
+  color: var(--text) !important;
+}
+
+/* Menu panel — matches screenshot exactly */
+.chat-upload-menu {
+  position: absolute !important;
+  left: 0 !important;
+  right: auto !important;
+  bottom: calc(100% + 8px) !important;
+  width: 220px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border-2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12) !important;
+  padding: 6px !important;
+  z-index: 1500 !important;
+  animation: fadeIn 0.1s ease;
+}
+
+/* Menu items — clean rows like screenshot */
+.chat-upload-menu-item {
+  width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 9px 10px !important;
+  border-radius: 7px !important;
+  cursor: pointer !important;
+  font-size: 13px !important;
+  font-family: var(--font) !important;
+  text-align: left !important;
+  transition: background 0.08s !important;
+}
+.chat-upload-menu-item:hover {
+  background: var(--surface-2) !important;
+}
+
+/* Left side of each item (icon + label) */
+.chat-upload-menu-item-main {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+/* Item icons — match screenshot size */
+.chat-upload-menu-icon {
+  width: 18px !important;
+  height: 18px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--text-2) !important;
+  flex-shrink: 0 !important;
+}
+.chat-upload-menu-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Chevron arrow for submenus */
+.chat-upload-menu-chevron {
+  color: var(--text-3);
+  font-size: 14px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Separator */
+.chat-upload-menu-sep {
+  height: 1px !important;
+  background: var(--border) !important;
+  margin: 4px 6px !important;
+}
+
+/* Submenu panel */
+.chat-upload-submenu {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 0;
+  width: 180px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  padding: 6px;
+  z-index: 1600;
+  animation: fadeIn 0.1s ease;
+}
+.chat-upload-submenu-wrap {
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CHAT UPLOAD BUTTON & MENU — final fix
+   Round neutral + button, menu escapes overflow clip via fixed positioning
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1. Round + button — neutral, no green */
+.chat-upload-btn {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--border-2) !important;
+  background: transparent !important;
+  color: var(--text-3) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+.chat-upload-btn:hover:not(:disabled) {
+  background: var(--surface-2) !important;
+  color: var(--text) !important;
+  border-color: var(--border-2) !important;
+}
+.chat-upload-btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+
+/* 2. Wrap: overflow visible so menu is not clipped */
+.chat-upload-wrap {
+  position: relative !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+  z-index: 1500 !important;
+}
+
+/* 3. Menu: use fixed positioning so it escapes any parent overflow:hidden */
+.chat-upload-menu {
+  position: fixed !important;
+  /* JS will set top/left via inline style or we use bottom-left anchor via transform */
+  bottom: auto !important;
+  right: auto !important;
+  left: auto !important;
+  /* default fallback – JS positions it; these just keep it from being invisible */
+  width: 224px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border-2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.12) !important;
+  padding: 6px !important;
+  z-index: 9999 !important;
+  animation: fadeIn 0.1s ease !important;
+}
+
+/* Items inside the menu */
+.chat-upload-menu .chat-upload-menu-item {
+  color: var(--text) !important;
+  font-size: 13.5px !important;
+  padding: 9px 12px !important;
+  border-radius: 8px !important;
+  gap: 10px !important;
+}
+.chat-upload-menu .chat-upload-menu-item:hover {
+  background: var(--surface-2) !important;
+}
+.chat-upload-menu .chat-upload-menu-icon {
+  color: var(--text-2) !important;
+}
+.chat-upload-menu .chat-upload-menu-sep {
+  background: var(--border) !important;
+  margin: 5px 8px !important;
+}
+.chat-upload-menu .chat-upload-menu-chevron {
+  color: var(--text-3) !important;
+  font-size: 16px !important;
+}
+
+/* Submenu also fixed */
+.chat-upload-submenu {
+  position: fixed !important;
+  width: 180px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border-2) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28) !important;
+  padding: 6px !important;
+  z-index: 10000 !important;
+}
+
+/* Hide the bottom-left + (Add) button from the chat composer toolbar */
+.chat-quick-actions .chat-icon-menu-wrap:first-child {
+  display: none !important;
+}
+
+/* ── Chat upload button moved to bottom toolbar ──────────────────────────── */
+
+/* Un-hide: the first slot is now the upload wrap, not the old round + */
+.chat-quick-actions .chat-icon-menu-wrap:first-child {
+  display: flex !important;
+}
+
+/* Make the upload button look like the other toolbar buttons (round, small) */
+.chat-quick-actions .chat-upload-btn {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 9px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface-2) !important;
+  color: var(--text-2) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: background 0.12s, color 0.12s, border-color 0.12s !important;
+}
+.chat-quick-actions .chat-upload-btn:hover:not(:disabled) {
+  background: var(--surface-3) !important;
+  color: var(--text) !important;
+  border-color: var(--border-2) !important;
+}
+.chat-quick-actions .chat-upload-btn:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+/* The upload wrap in the toolbar should not use relative+float positioning */
+.chat-quick-actions .chat-upload-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  order: 0 !important;
+}
+
+/* Remove only a direct top-level + in composer-top (not the bottom toolbar one). */
+.chat-composer-top > .chat-upload-wrap {
+  display: none !important;
+}
+
+/* Keep the + tools menu on the lower-left inside the chat input box. */
+.chat-composer-bottom {
+  align-items: flex-end !important;
+}
+.chat-composer-bottom .chat-quick-actions {
+  gap: 6px !important;
+}
+
+/* Ensure + button remains visible in the bottom-left toolbar. */
+.chat-composer-bottom .chat-upload-wrap {
+  display: flex !important;
+}
+
+/* Submenus should open beside the main menu (not viewport top-left). */
+.chat-upload-submenu {
+  position: absolute !important;
+  left: calc(100% + 4px) !important;
+  top: 0 !important;
+}
+
+/* Final: + button inside input (bottom-left) and screenshot-matching hover/menu. */
+.chat-input-wrap {
+  position: relative !important;
+  padding-bottom: 44px !important;
+  min-height: 100px !important;
+}
+.chat-input-wrap .chat-input {
+  min-height: 30px !important;
+  padding-top: 8px !important;
+}
+.chat-composer-bottom {
+  position: absolute !important;
+  left: 10px !important;
+  right: 10px !important;
+  bottom: 8px !important;
+  margin-top: 0 !important;
+  align-items: flex-end !important;
+  min-height: 32px !important;
+}
+.chat-composer-bottom .chat-quick-actions {
+  gap: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+}
+.chat-composer-bottom .chat-quick-actions .chat-upload-wrap,
+.chat-composer-bottom .chat-quick-actions .chat-icon-menu-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+.chat-composer-bottom .chat-right-actions {
+  margin-left: 0 !important;
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
+}
+.chat-composer-bottom .chat-icon-menu-wrap {
+  order: 1 !important;
+  margin-left: 0 !important;
+}
+.chat-composer-bottom .chat-upload-wrap {
+  order: 0 !important;
+}
+.chat-composer-bottom .chat-upload-btn {
+  width: 31px !important;
+  height: 31px !important;
+  border-radius: 9999px !important;
+  border: 1px solid var(--border-2) !important;
+  background: var(--surface-2) !important;
+  color: var(--text-2) !important;
+}
+.chat-composer-bottom .chat-upload-btn:hover:not(:disabled) {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+.chat-composer-bottom .chat-upload-btn.active:not(:disabled) {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+/* Computer button beside +, same family style, no white circular box. */
+.chat-composer-bottom .chat-quick-btn {
+  width: 31px !important;
+  height: 31px !important;
+  border-radius: 9999px !important;
+  border: 1px solid var(--border-2) !important;
+  background: var(--surface-2) !important;
+  color: #111111 !important;
+  box-shadow: none !important;
+}
+.chat-composer-bottom .chat-quick-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+.chat-composer-bottom .chat-quick-btn:hover:not(:disabled) {
+  background: var(--surface-3) !important;
+  color: var(--text) !important;
+}
+.chat-composer-bottom .chat-quick-btn.active:not(:disabled) {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.chat-upload-submenu {
+  width: 238px !important;
+}
+.chat-upload-subtoggle-row {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font);
+}
+.chat-upload-subtoggle-row:hover {
+  background: var(--surface-2);
+}
+.chat-upload-subtoggle-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.chat-upload-subtoggle-icon {
+  width: 14px;
+  color: var(--text-2);
+  text-align: center;
+}
+.chat-upload-subtoggle-switch {
+  position: relative;
+  width: 30px;
+  height: 18px;
+  border-radius: 999px;
+  background: #d1d5db;
+  transition: background 0.14s;
+}
+.chat-upload-subtoggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.14s;
+}
+.chat-upload-subtoggle-switch.on {
+  background: #3b82f6;
+}
+.chat-upload-subtoggle-switch.on::after {
+  transform: translateX(12px);
+}
+
+/* Footer menus: Agent + Auto (below input) */
+.chat-footer-menus {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.chat-footer-menu-item {
+  position: relative;
+}
+.chat-footer-icon-btn {
+  width: 31px;
+  height: 31px;
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text-2);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.chat-footer-icon-btn:hover:not(:disabled) {
+  background: var(--surface-3);
+  color: var(--text);
+}
+.chat-footer-icon-btn.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Model chip — shows icon + model name in the bottom bar */
+.chat-footer-model-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px 5px 8px;
+  height: 31px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  color: var(--text-2);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.12s ease;
+  white-space: nowrap;
+  max-width: 160px;
+}
+.chat-footer-model-chip:hover:not(:disabled),
+.chat-footer-model-chip.active {
+  background: var(--surface-3);
+  border-color: var(--border-2);
+  color: var(--text);
+}
+.chat-footer-model-chip:disabled { opacity: 0.45; cursor: not-allowed; }
+.chat-footer-model-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 110px;
+}
+/* Arrow hint when chip is inside the overflow panel */
+.chat-composer-overflow-section .chat-footer-model-chip {
+  width: 100%;
+  max-width: 100%;
+  justify-content: space-between;
+  border-radius: 8px;
+}
+.chat-composer-overflow-section .chat-footer-model-chip::after {
+  content: '›';
+  font-size: 14px;
+  color: var(--text-3);
+  margin-left: 4px;
+}
+
+/* Inline model list inside the overflow panel */
+.chat-footer-model-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  padding: 4px 0 2px;
+  border-top: 1px solid var(--border);
+}
+.chat-footer-model-inline .chat-footer-model-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.chat-footer-model-inline .chat-footer-model-search {
+  margin-bottom: 4px;
+}
+
+.chat-footer-dropdown {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  min-width: 240px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+  padding: 6px;
+  z-index: 1800;
+}
+.chat-footer-menu-item:last-child .chat-footer-dropdown {
+  left: 0;
+  right: auto;
+}
+.chat-footer-dropdown--down {
+  bottom: auto;
+  top: calc(100% + 4px);
+  z-index: 2100;
+}
+.chat-footer-dropdown-model {
+  width: 280px;
+  max-width: min(280px, calc(100vw - 24px));
+}
+.chat-footer-dropdown-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  border-radius: 7px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.35;
+  font-family: var(--font);
+  cursor: pointer;
+}
+.chat-footer-dropdown-item:hover {
+  background: var(--surface-3);
+  color: var(--text);
+}
+.chat-footer-dropdown-item.selected {
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface-3) 82%);
+  color: var(--text);
+}
+.chat-footer-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chat-footer-dropdown-meta {
+  color: var(--text-2);
+  font-size: 12px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.chat-footer-dropdown-meta-discount {
+  color: var(--text-2);
+}
+.chat-footer-dropdown-meta-ratio {
+  color: color-mix(in srgb, var(--accent) 68%, var(--text) 32%);
+}
+.chat-footer-dropdown-meta-upgrade {
+  color: var(--accent);
+  font-weight: 500;
+}
+.chat-footer-dropdown-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 5px 6px;
+}
+.chat-footer-model-search-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 2px 6px;
+}
+.chat-footer-model-search {
+  flex: 1;
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 7px;
+  height: 30px;
+  padding: 0 9px;
+  font-size: 12px;
+  font-family: var(--font);
+}
+.chat-footer-model-search::placeholder {
+  color: var(--text-3);
+}
+.chat-footer-model-gear {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text-2);
+  border-radius: 7px;
+  cursor: pointer;
+}
+.chat-footer-model-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+  overflow-y: auto;
+  gap: 2px;
+}
+
+/* ── Chat bottom bar: square accent + button + GitHub + monitor ──────────── */
+
+/* The + button: square, accent-colored, like picture 5 */
+.chat-quick-actions .chat-upload-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 6px !important;
+  background: var(--accent) !important;
+  border: none !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: opacity 0.12s !important;
+}
+.chat-quick-actions .chat-upload-btn:hover:not(:disabled) {
+  opacity: 0.88 !important;
+  background: var(--accent) !important;
+}
+.chat-quick-actions .chat-upload-btn:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+/* GitHub button — same style as the other toolbar buttons */
+.chat-github-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: background 0.12s, color 0.12s;
+}
+.chat-github-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* ── REVERT: square accent + button → back to neutral ──────────────────── */
+.chat-quick-actions .chat-upload-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  border: 1px solid var(--border-2) !important;
+  color: var(--text-2) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+.chat-quick-actions .chat-upload-btn:hover:not(:disabled) {
+  background: var(--surface-2) !important;
+  color: var(--text) !important;
+  opacity: 1 !important;
+}
+
+/* ── REVERT: hide GitHub button if it still appears anywhere ────────────── */
+.chat-github-btn { display: none !important; }
+
+/* Final hover color for all bottom composer icons */
+.chat-composer-bottom .chat-upload-btn:hover:not(:disabled),
+.chat-composer-bottom .chat-quick-btn:hover:not(:disabled),
+.chat-composer-bottom .chat-footer-icon-btn:hover:not(:disabled) {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+/* Final base visibility: keep composer icons readable across all themes. */
+.chat-composer-bottom .chat-upload-btn:not(:hover):not(.active):not(:disabled),
+.chat-composer-bottom .chat-quick-btn:not(:hover):not(.active):not(:disabled),
+.chat-composer-bottom .chat-footer-icon-btn:not(:hover):not(.active):not(:disabled),
+.chat-permission-item .chat-controls-btn:not(:hover):not(.active):not(:disabled),
+.chat-mic-btn:not(:hover):not(.active):not(.recording):not(:disabled),
+.chat-mic-caret-btn:not(:hover):not(.active):not(:disabled) {
+  color: var(--text) !important;
+}
+.chat-permission-item .chat-controls-btn:not(:hover):not(.active):not(:disabled) .chat-controls-icon,
+.chat-permission-item .chat-controls-btn:not(:hover):not(.active):not(:disabled) .chat-controls-chevron {
+  color: var(--text) !important;
+}

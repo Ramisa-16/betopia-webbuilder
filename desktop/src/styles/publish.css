@@ -1,0 +1,184 @@
+/* ── Publish settings panel (Manus-style) ────────────────────────────────── */
+.publish-settings-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 16px;
+  width: 720px;
+  max-width: calc(100vw - 40px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+}
+.publish-settings-header {
+  height: 58px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.publish-settings-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.publish-settings-body {
+  padding: 18px 20px 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.publish-settings-section {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--surface-2);
+}
+.publish-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-2);
+  margin-bottom: 10px;
+}
+.publish-settings-project {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.publish-project-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: #0e1011;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.publish-project-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+.publish-project-path {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+  max-width: 560px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.publish-visibility-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.publish-select {
+  min-width: 210px;
+  height: 34px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0 10px;
+}
+.publish-status-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.publish-status-row,
+.publish-url-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+.publish-url-row a {
+  color: var(--accent);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.publish-status-pill {
+  color: #9ca3af;
+  font-weight: 600;
+}
+.publish-status-pill.published {
+  color: #34d399;
+}
+.publish-action-card,
+.publish-toggle-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.publish-action-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+.publish-action-sub {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+.publish-switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  display: inline-block;
+}
+.publish-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.publish-switch-slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: #3f3f46;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.publish-switch-slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  transition: transform 0.2s;
+}
+.publish-switch input:checked + .publish-switch-slider {
+  background: #22c55e;
+}
+.publish-switch input:checked + .publish-switch-slider::before {
+  transform: translateX(18px);
+}
+
+/* ── No-files preview state ───────────────────────────────────────────────── */
+.preview-no-files {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex: 1; gap: 12px; padding: 40px; text-align: center;
+  background: var(--bg);
+}
+.preview-no-files-icon  { font-size: 40px; color: var(--text-3); }
+.preview-no-files-title { font-size: 16px; font-weight: 600; color: var(--text-2); margin: 0; }
+.preview-no-files-sub   { font-size: 13px; color: var(--text-3); max-width: 320px; line-height: 1.6; margin: 0; }
