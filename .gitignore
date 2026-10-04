@@ -1,0 +1,78 @@
+# Binaries for programs and plugins
+#*.exe
+#*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# IDE specific files
+.idea/
+.vscode/
+# Allow the VS Code extension's launch/task config to be committed
+!vscode_extention/.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+
+# Binary output directory
+/bin/
+#/dist/
+
+# Local environment variables
+.env
+.env.local
+.env.*
+!.env.example
+
+**/.crush/**
+
+/crush
+/tmp/
+
+# Built Go binaries
+/betopia
+/betopia-coder
+
+# Desktop app build artifacts
+desktop/betopia
+desktop/src-tauri/betopia
+desktop/src-tauri/target/
+desktop/dist/
+desktop/node_modules/
+desktop/.sandbox-runtime/
+
+manpages/
+completions/crush.*sh
+.prettierignore
+.task
+
+# Betopia app runtime + generated
+betopia_config.json
+desktop/src-tauri/gen/
+desktop/coverage/
+desktop/.vite/
+
+# git auto-tracker lock (safety; lives under .git but guard anyway)
+.tracker-updating

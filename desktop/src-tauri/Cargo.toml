@@ -1,0 +1,65 @@
+[package]
+name = "betopia-webbuilder"
+version = "0.1.0-beta"
+edition = "2021"
+
+[lib]
+name = "betopia_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-http = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-os = "2"
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tiny_http = "0.12"
+tokio = { version = "1", features = ["full"] }
+
+# Phase 2: PTY terminal
+portable-pty = "0.8"
+
+# Phase 2: OS keychain
+keyring = { version = "3" }
+
+# Phase 2: HTTP proxy for local AI (LM Studio, Ollama)
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "stream", "json", "blocking"] }
+futures-util = "0.3"
+bytes = "1"
+url = "2"
+
+# Phase 2: Smart file ops
+ignore = "0.4"
+walkdir = "2"
+glob = "0.3"
+
+# Agent detection + Claude hooks
+dirs = "5"
+
+# Icon decoding for taskbar icon (Windows)
+image = { version = "0.25", default-features = false, features = ["png"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_JobObjects", "Win32_System_Threading"] }
+
+# File system watcher for incremental refresh
+notify = { version = "8", features = ["macos_fsevent"] }
+
+[profile.dev]
+incremental = true
+codegen-units = 1
+opt-level = 0
+debug = 0
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
